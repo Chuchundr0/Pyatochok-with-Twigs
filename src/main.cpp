@@ -2,6 +2,7 @@
 #include <raylib.h>
 
 #include "include/assets_manager/assets_manager.hpp"
+#include "include/tilemap/tilemap.hpp"
 
 #define WINDOW_HEIGHT 1200
 #define WINDOW_WIDTH 1920
@@ -13,10 +14,8 @@ int main() {
 	SetTargetFPS(120);
 
 	AssetsManager::LoadAssets();
-	AssetsManager::LoadAtlas("player");
-	AssetsManager::LoadTextureFromAtlas("pyatochok", (Rectangle){0, 0, 16, 16});
-	Texture2D pig_texture = AssetsManager::GetTexture("pyatochok");
-	
+	Tilemap::GenerateMap();
+
 	float pressedExitKeyTime = 0.0f;
 	while(!WindowShouldClose()) {
 		if(pressedExitKeyTime >= HOLD_EXIT_TIME) break;
@@ -26,7 +25,7 @@ int main() {
 		BeginDrawing();
 
 		ClearBackground(SKYBLUE);
-		DrawTextureEx(pig_texture, (Vector2){0, 0}, 0.0f, 4.0f, WHITE);
+		Tilemap::DrawMap();
 
 		EndDrawing();
 	}

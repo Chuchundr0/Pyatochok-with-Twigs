@@ -42,17 +42,20 @@ void AssetsManager::LoadTextureFromAtlas(const std::string &key, const Rectangle
 
 Texture2D& AssetsManager::GetTexture(const std::string &key) {
 	auto it = textures.find(key);
-	if(it != textures.end()) {
-		return it->second;
+	if(it == textures.end()) {
+		TraceLog(LOG_FATAL, "Texture not found: %s", key.c_str());	
+		AssetsManager::UnloadAll();
+		exit(1);
 	}
-	else {
-		TraceLog(LOG_ERROR, "Texture not found: %s", key.c_str());
-	}
+	return it->second;
 }
 
 void AssetsManager::UnloadAll() {
 	for(auto &[key, texture] : textures) {
 		UnloadTexture(texture);
+	}
+	for(auto &[key, atlas_texture] : atlas_assets) {
+		UnloadTexture(atlas_texture);
 	}
 	UnloadTexture(atlas);
 	textures.clear();
