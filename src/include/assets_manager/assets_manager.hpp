@@ -4,8 +4,8 @@
 #include <string>
 #include <raylib.h>
 
-#include "../assets/texture.h"
-#include "../assets/player.h"
+#include "../assets/texture.hpp"
+#include "../assets/player.hpp"
 
 class AssetsManager {
 private:	
