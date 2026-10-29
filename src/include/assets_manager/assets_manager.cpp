@@ -1,18 +1,18 @@
 #include "assets_manager.hpp"
 
-std::unordered_map<std::string, Texture2D> AssetsManager::textures;
-std::unordered_map<std::string, Texture2D> AssetsManager::atlas_assets;
-Texture2D AssetsManager::atlas;
+std::vector<Texture2D> AssetsManager::textures_buffer;
+std::unordered_map<std::string, Texture2D> AssetsManager::atlases_buffer;
+Texture2D AssetsManager::current_atlas;
 
 void AssetsManager::LoadAssets() {
-	Image texture_image = {
+	Image textures_image = {
 		.data = TEXTURE_DATA,
 		.width = TEXTURE_WIDTH,
 		.height = TEXTURE_HEIGHT,
 		.mipmaps = 1,
 		.format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8
 	};
-	Texture2D texture_texture = LoadTextureFromImage(texture_image);
+	Texture2D textures_texture = LoadTextureFromImage(textures_image);
 	Image player_image = {
         .data = PLAYER_DATA,
         .width = PLAYER_WIDTH,
@@ -22,41 +22,32 @@ void AssetsManager::LoadAssets() {
 	};
 	Texture2D player_texture = LoadTextureFromImage(player_image);
 	
-	atlas_assets["texture"] = texture_texture;
-	atlas_assets["player"] = player_texture;
+	atlases_buffer["texture"] = textures_texture;
+	atlases_buffer["player"] = player_texture;
 }
 
 void AssetsManager::LoadAtlas(const std::string &key) {
-	atlas = atlas_assets[key];
+	current_atlas = atlases_buffer[key];
 };
 
-void AssetsManager::LoadTextureFromAtlas(const std::string &key, const Rectangle &crop_rectangle) {
-	Image atlas_image = LoadImageFromTexture(atlas);
+Texture2D& AssetsManager::LoadTextureFromAtlas(const Rectangle &crop_rectangle) {
+	Image atlas_image = LoadImageFromTexture(current_atlas);
 	Image cropped_image = ImageFromImage(atlas_image, crop_rectangle);
 	Texture2D cropped_texture = LoadTextureFromImage(cropped_image);
 	UnloadImage(atlas_image);
 	UnloadImage(cropped_image);
-
-	textures[key] = cropped_texture;
-}
-
-Texture2D& AssetsManager::GetTexture(const std::string &key) {
-	auto it = textures.find(key);
-	if(it == textures.end()) {
-		TraceLog(LOG_FATAL, "Texture not found: %s", key.c_str());	
-		AssetsManager::UnloadAll();
-		exit(1);
-	}
-	return it->second;
+	
+	textures_buffer.push_back(cropped_texture);
+	return textures_buffer.back();
 }
 
 void AssetsManager::UnloadAll() {
-	for(auto &[key, texture] : textures) {
+	for(auto &texture : textures_buffer) {
 		UnloadTexture(texture);
 	}
-	for(auto &[key, atlas_texture] : atlas_assets) {
+	for(auto &[key, atlas_texture] : atlases_buffer) {
 		UnloadTexture(atlas_texture);
 	}
-	UnloadTexture(atlas);
-	textures.clear();
+	UnloadTexture(current_atlas);
+	textures_buffer.clear();
 }

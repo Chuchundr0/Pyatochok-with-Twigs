@@ -7,16 +7,11 @@ Tile::Tile(const Rectangle &collision, Texture2D texture) :
 
 void Tilemap::GenerateMap() {
 	AssetsManager::LoadAtlas("texture");
-	AssetsManager::LoadTextureFromAtlas("dirt_01", (Rectangle){112, 112, 16, 16});
-	AssetsManager::LoadTextureFromAtlas("dirt_02", (Rectangle){96, 112, 16, 16});
-	AssetsManager::LoadTextureFromAtlas("grass_01", (Rectangle){96, 96, 16, 16});
-	AssetsManager::LoadTextureFromAtlas("grass_02", (Rectangle){112, 96, 16, 16});
+	Texture2D dirt_texture_01 = AssetsManager::LoadTextureFromAtlas((Rectangle){112, 112, 16, 16});
+	Texture2D dirt_texture_02 = AssetsManager::LoadTextureFromAtlas((Rectangle){96, 112, 16, 16});
+	Texture2D grass_texture_01 = AssetsManager::LoadTextureFromAtlas((Rectangle){96, 96, 16, 16});
+	Texture2D grass_texture_02 = AssetsManager::LoadTextureFromAtlas((Rectangle){112, 96, 16, 16});
 	
-	Texture2D &dirt_texture_01 = AssetsManager::GetTexture("dirt_01");
-	Texture2D &dirt_texture_02 = AssetsManager::GetTexture("dirt_02");
-	Texture2D &grass_texture_01 = AssetsManager::GetTexture("grass_01");
-	Texture2D &grass_texture_02 = AssetsManager::GetTexture("grass_02");
-
 	std::random_device randomizer;
 	std::mt19937 generator(randomizer());
 	std::uniform_int_distribution<int> dist(1, 100);
