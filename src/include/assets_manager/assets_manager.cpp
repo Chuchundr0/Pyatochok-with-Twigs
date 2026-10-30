@@ -48,6 +48,5 @@ void AssetsManager::UnloadAll() {
 	for(auto &[key, atlas_texture] : atlases_buffer) {
 		UnloadTexture(atlas_texture);
 	}
-	UnloadTexture(current_atlas);
 	textures_buffer.clear();
 }
