@@ -7,14 +7,14 @@
 #include "../animation/animation.hpp"
 
 #define GROUND_LEVEL_Y 848
-#define MAX_SPEED_X 200.0f
-#define MAX_SPEED_Y 400.0f
-#define ACCEL_SPEED_X 10.0f
-#define ANIMATIONS_LEVELS_Y 4
+#define MAX_SPEED_X 250.0f
+#define MAX_SPEED_Y 550.0f
+#define ACCEL_SPEED_X 15.0f
+#define ANIMATIONS_LEVELS_Y 6
 #define ANIMATIONS_LEVELS_X 3
 #define PLAYER_TEXTURE_SIZE 16
-#define GRAVITY 2000.0f
-#define GRAVITY_HOLD 1000.0f
+#define GRAVITY 2100.0f
+#define GRAVITY_HOLD 1100.0f
 
 class Player {
 private:
@@ -28,7 +28,7 @@ private:
 	bool hold_twigs = false;
 
 public:
-	Player(Vector2 position);
+	Player(const Vector2 &position);
 	void LoadAnimations();
 	void Update();
 	void DrawAnimationFrame();

@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-Player::Player(Vector2 position) :
+Player::Player(const Vector2 &position) :
 	position(position) {}
 
 void Player::LoadAnimations() {
@@ -12,7 +12,7 @@ void Player::LoadAnimations() {
 			Rectangle crop_rectangle = {(float)(PLAYER_TEXTURE_SIZE * x), (float)(PLAYER_TEXTURE_SIZE * y), PLAYER_TEXTURE_SIZE, PLAYER_TEXTURE_SIZE};
 			textures.push_back(AssetsManager::LoadTextureFromAtlas(crop_rectangle));
 		}
-		Animation new_animation(textures, 0.5f);
+		Animation new_animation(textures, 0.4f);
 		animations.push_back(new_animation);
 	}
 }
@@ -58,24 +58,32 @@ void Player::Update() {
 }
 
 void Player::DrawAnimationFrame() {
-	if(IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) {
-		if(hold_twigs) {
-			animations[3].Update();
-			animations[3].DrawFrame(position, direction);
-		}
-		else if(!hold_twigs) {
-			animations[1].Update();
-			animations[1].DrawFrame(position, direction);
-		}
-	}
-	else {
-		if(hold_twigs) {
+	if(!hold_twigs) {
+		if(!on_ground) {
 			animations[2].Update();
 			animations[2].DrawFrame(position, direction);
 		}
-		else if(!hold_twigs) {
+		else if(IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) {
+			animations[1].Update();
+			animations[1].DrawFrame(position, direction);
+		}
+		else {
 			animations[0].Update();
 			animations[0].DrawFrame(position, direction);
-		}		
+		}
+	}
+	else {
+		if(!on_ground) {
+			animations[5].Update();
+			animations[5].DrawFrame(position, direction);
+		}
+		else if(IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) {
+			animations[4].Update();
+			animations[4].DrawFrame(position, direction);
+		}
+		else {
+			animations[3].Update();
+			animations[3].DrawFrame(position, direction);
+		}
 	}
 }

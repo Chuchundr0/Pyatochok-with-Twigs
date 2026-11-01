@@ -1,6 +1,6 @@
 #include "animation.hpp"
 
-Animation::Animation(std::vector<Texture2D> textures, const float &frame_time) :
+Animation::Animation(const std::vector<Texture2D> &textures, float frame_time) :
 	textures(textures), frame_time(frame_time) {}
 
 void Animation::Update() {
@@ -20,6 +20,6 @@ void Animation::DrawFrame(const Vector2 &position, short direction) {
 	DrawTexturePro(textures[current_frame], source, dest, {0, 0}, 0.0f, WHITE);
 }
 
-void Animation::SetAnimationTimer(const float &animation_timer) {
+void Animation::SetAnimationTimer(float animation_timer) {
 	this->animation_timer = animation_timer;
 }
