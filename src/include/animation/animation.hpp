@@ -16,5 +16,4 @@ public:
 	Animation(const std::vector<Texture2D> &textures, float frame_time);
 	void Update();
 	void DrawFrame(const Vector2 &position, short direction);
-	void SetAnimationTimer(float animation_timer);
 };

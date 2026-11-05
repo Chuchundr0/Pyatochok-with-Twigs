@@ -5,12 +5,13 @@ Campfire::Campfire(const Vector2 &position) :
 
 void Campfire::LoadAnimations() {
 	AssetsManager::LoadAtlas("texture");
-	Rectangle crop_rectangle = {0, 0, CF_TEXTURE_SIZE, CF_TEXTURE_SIZE};
+	Rectangle crop_rectangle = {32, 0, CF_TEXTURE_SIZE, CF_TEXTURE_SIZE};
 	texture = AssetsManager::LoadTextureFromAtlas(crop_rectangle);
-	for(int x = CF_ANIMATIONS_OFFSET_X; x < CF_ANIMATIONS_LEVELS_X + CF_ANIMATIONS_OFFSET_X; ++x) {
+	
+	for(int y = CF_ANIMATIONS_OFFSET_Y; y < CF_ANIMATIONS_LEVELS_Y + CF_ANIMATIONS_OFFSET_Y; ++y) {
 		std::vector<Texture2D> textures;
 		textures.reserve(CF_ANIMATIONS_LEVELS_X);
-		for(int y = 0; y < CF_ANIMATIONS_LEVELS_Y; ++y) {
+		for(int x = 0; x < CF_ANIMATIONS_LEVELS_X; ++x) {
 			Rectangle crop_rectangle = {(float)(CF_TEXTURE_SIZE * x), (float)(CF_TEXTURE_SIZE * y), CF_TEXTURE_SIZE, CF_TEXTURE_SIZE};
 			textures.push_back(AssetsManager::LoadTextureFromAtlas(crop_rectangle));
 		}

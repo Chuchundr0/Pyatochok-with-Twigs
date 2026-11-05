@@ -13,8 +13,8 @@
 #define PL_ANIMATIONS_LEVELS_Y 6
 #define PL_ANIMATIONS_LEVELS_X 3
 #define PL_TEXTURE_SIZE 16
-#define PL_GRAVITY 2100.0f
-#define PL_GRAVITY_HOLD 1100.0f
+#define PL_GRAVITY 2300.0f
+#define PL_GRAVITY_HOLD 1600.0f
 
 class Player {
 private:

@@ -7,9 +7,9 @@
 #include "../animation/animation.hpp"
 #include "../assets_manager/assets_manager.hpp"
 
-#define CF_ANIMATIONS_LEVELS_Y 2
-#define CF_ANIMATIONS_LEVELS_X 3
-#define CF_ANIMATIONS_OFFSET_X 1
+#define CF_ANIMATIONS_LEVELS_Y 3
+#define CF_ANIMATIONS_LEVELS_X 2
+#define CF_ANIMATIONS_OFFSET_Y 1
 #define CF_MIN_COMBUSTION 0.0f
 #define CF_MAX_COMBUSTION 100.0f
 #define CF_REDUCED_COMBUSTION 0.005f

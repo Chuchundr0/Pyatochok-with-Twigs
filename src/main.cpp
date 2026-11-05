@@ -37,11 +37,11 @@ int main() {
 
 		BeginDrawing();
 
-		ClearBackground((Color){156, 192, 255, 255});
-		Tilemap::DrawMap();
+		ClearBackground((Color){36, 159, 222, 255});
 
 		campfire.DrawAnimationFrame();
 		player.DrawAnimationFrame();
+		Tilemap::DrawMap();
 
 		EndDrawing();
 	}

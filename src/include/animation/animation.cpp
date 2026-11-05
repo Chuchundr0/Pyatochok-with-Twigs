@@ -19,7 +19,3 @@ void Animation::DrawFrame(const Vector2 &position, short direction) {
 	Rectangle dest = {position.x, position.y, (float)textures[current_frame].width * ANIMATION_TEXTURE_SCALE, (float)textures[current_frame].height * ANIMATION_TEXTURE_SCALE};
 	DrawTexturePro(textures[current_frame], source, dest, {0, 0}, 0.0f, WHITE);
 }
-
-void Animation::SetAnimationTimer(float animation_timer) {
-	this->animation_timer = animation_timer;
-}

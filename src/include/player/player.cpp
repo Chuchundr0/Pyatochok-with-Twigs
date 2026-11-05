@@ -5,27 +5,28 @@ Player::Player(const Vector2 &position) :
 
 void Player::LoadAnimations() {
 	AssetsManager::LoadAtlas("player");
+
+	std::vector<Texture2D> textures;
+	Rectangle crop_rectangle;
 	for(int y = 0; y < PL_ANIMATIONS_LEVELS_Y; ++y) {
-		std::vector<Texture2D> textures;
-		textures.reserve(PL_ANIMATIONS_LEVELS_X);
 		for(int x = 0; x < PL_ANIMATIONS_LEVELS_X; ++x) {
-			Rectangle crop_rectangle = {(float)(PL_TEXTURE_SIZE * x), (float)(PL_TEXTURE_SIZE * y), PL_TEXTURE_SIZE, PL_TEXTURE_SIZE};
+			crop_rectangle = {(float)(PL_TEXTURE_SIZE * x), (float)(PL_TEXTURE_SIZE * y), PL_TEXTURE_SIZE, PL_TEXTURE_SIZE};
 			textures.push_back(AssetsManager::LoadTextureFromAtlas(crop_rectangle));
 		}
 		Animation new_animation(textures, 0.4f);
 		animations.push_back(new_animation);
+		textures.clear();
 	}
 }
 
 void Player::Update() {
 	float delta_time = GetFrameTime();
-
 	float target_speed = 0.0f;
-	if(IsKeyDown(KEY_A)) {
+	if(IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) {
 		direction = 0;
 		target_speed = -PL_MAX_SPEED_X;
 	}
-	if(IsKeyDown(KEY_D)) {
+	else if(IsKeyDown(KEY_D) && !IsKeyDown(KEY_A)) {
 		direction = 1;
 		target_speed = PL_MAX_SPEED_X;
 	}
@@ -63,7 +64,7 @@ void Player::DrawAnimationFrame() {
 			animations[2].Update();
 			animations[2].DrawFrame(position, direction);
 		}
-		else if(IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) {
+		else if((IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) || (IsKeyDown(KEY_D) && ! IsKeyDown(KEY_A))) {
 			animations[1].Update();
 			animations[1].DrawFrame(position, direction);
 		}
@@ -77,7 +78,7 @@ void Player::DrawAnimationFrame() {
 			animations[5].Update();
 			animations[5].DrawFrame(position, direction);
 		}
-		else if(IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) {
+		else if((IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) || (IsKeyDown(KEY_D) && ! IsKeyDown(KEY_A))) {
 			animations[4].Update();
 			animations[4].DrawFrame(position, direction);
 		}
