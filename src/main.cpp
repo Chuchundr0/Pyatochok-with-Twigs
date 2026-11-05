@@ -6,6 +6,7 @@
 #include "include/tilemap/tilemap.hpp"
 #include "include/animation/animation.hpp"
 #include "include/player/player.hpp"
+#include "include/entity/campfire.hpp"
 
 #define WINDOW_HEIGHT 1200
 #define WINDOW_WIDTH 1920
@@ -19,8 +20,11 @@ int main() {
 	AssetsManager::LoadAssets();
 	Tilemap::GenerateMap();
 
-	Player player((Vector2){(float)WINDOW_WIDTH / 2.0f, 0.0f});
+	Player player((Vector2){928, -100});
 	player.LoadAnimations();
+
+	Campfire campfire((Vector2){896, 776});
+	campfire.LoadAnimations();
 
 	float pressedExitKeyTime = 0.0f;
 	while(!WindowShouldClose()) {
@@ -29,12 +33,14 @@ int main() {
 		else pressedExitKeyTime = 0.0f;
 
 		player.Update();
+		campfire.Update();
 
 		BeginDrawing();
 
 		ClearBackground((Color){156, 192, 255, 255});
 		Tilemap::DrawMap();
 
+		campfire.DrawAnimationFrame();
 		player.DrawAnimationFrame();
 
 		EndDrawing();

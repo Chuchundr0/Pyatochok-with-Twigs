@@ -3,7 +3,7 @@
 #include <vector>
 #include <raylib.h>
 
-#define TEXTURE_SIZE 64.0f
+#define ANIMATION_TEXTURE_SCALE 4.0f
 
 class Animation {
 private:

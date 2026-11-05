@@ -10,10 +10,12 @@ SRCS = src/main.cpp \
 	   src/include/tilemap/tilemap.cpp \
 	   src/include/animation/animation.cpp \
 	   src/include/player/player.cpp \
+	   src/include/entity/campfire.cpp \
 
 $(TARGET): $(SRCS)
 	mkdir $(BUILD)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LIBS)
 
 clean:
+	rm -r $(BUILD)
 	rm -f $(TARGET)

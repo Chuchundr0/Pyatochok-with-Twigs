@@ -6,15 +6,15 @@
 #include "../assets_manager/assets_manager.hpp"
 #include "../animation/animation.hpp"
 
-#define GROUND_LEVEL_Y 848
-#define MAX_SPEED_X 250.0f
-#define MAX_SPEED_Y 550.0f
-#define ACCEL_SPEED_X 15.0f
-#define ANIMATIONS_LEVELS_Y 6
-#define ANIMATIONS_LEVELS_X 3
-#define PLAYER_TEXTURE_SIZE 16
-#define GRAVITY 2100.0f
-#define GRAVITY_HOLD 1100.0f
+#define PL_GROUND_LEVEL 840
+#define PL_MAX_SPEED_X 250.0f
+#define PL_MAX_SPEED_Y 550.0f
+#define PL_ACCEL_SPEED_X 15.0f
+#define PL_ANIMATIONS_LEVELS_Y 6
+#define PL_ANIMATIONS_LEVELS_X 3
+#define PL_TEXTURE_SIZE 16
+#define PL_GRAVITY 2100.0f
+#define PL_GRAVITY_HOLD 1100.0f
 
 class Player {
 private:
